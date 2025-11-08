@@ -1,16 +1,11 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { App, ConfigProvider } from "antd";
+import "@ant-design/v5-patch-for-react-19";
+import zhCN from "antd/locale/zh_CN";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import "dayjs/locale/zh-cn";
+import dayjs from "dayjs";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -22,12 +17,13 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  dayjs.locale("zh-cn");
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+    <html lang="zh">
+      <body>
+        <ConfigProvider locale={zhCN}>
+          <App>{children}</App>
+        </ConfigProvider>
       </body>
     </html>
   );
