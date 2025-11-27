@@ -13,18 +13,6 @@ export default function AccountTable() {
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [modalAccountId, setModalAccountId] = useState<number | null>();
-  const handleModalOpen = (accountId: number) => {
-    setModalAccountId(accountId);
-    setIsModalOpen(true);
-  };
-
-  const handleModalFinish = () => {
-    setIsModalOpen(false);
-  };
-
-  const handleModalCancel = () => {
-    setIsModalOpen(false);
-  };
 
   const tableColumns = [
     { title: "用户名", dataIndex: "username", key: "username" },
@@ -71,8 +59,8 @@ export default function AccountTable() {
       ),
     },
   ];
-
-  const fetchData = useCallback(async () => {
+  
+  const fetchData = async () => {
     await service
       .get("/api/account/list", {
         params: {
@@ -83,11 +71,24 @@ export default function AccountTable() {
       })
       .then((res) => {
         if (res.data.code === 200) {
-          console.log(res.data.data);
           setData(res.data.data);
         }
       });
-  }, [pageNum, pageSize]);
+  };
+
+  const handleModalOpen = (accountId: number) => {
+    setModalAccountId(accountId);
+    setIsModalOpen(true);
+  };
+
+  const handleModalFinish = () => {
+    fetchData();
+    setIsModalOpen(false);
+  };
+
+  const handleModalCancel = () => {
+    setIsModalOpen(false);
+  };
 
   useEffect(() => {
     fetchData();

@@ -1,7 +1,7 @@
 "use client";
 
 import service from "@/axios";
-import { Table } from "antd";
+import { Button, Table } from "antd";
 import { useCallback, useEffect, useState } from "react";
 
 export default function AccountRoleTable() {
@@ -10,6 +10,16 @@ export default function AccountRoleTable() {
     { title: "权限名称", dataIndex: "roleName", key: "roleName" },
     { title: "权限称呼", dataIndex: "roleNick", key: "roleNick" },
     { title: "管辖范围", dataIndex: "topicName", key: "topicName" },
+    { title: "权限等级", dataIndex: "priority", key: "priority" },
+    {
+      title: "操作",
+      key: "action",
+      render: (value: number, record: Role) => (
+        <div className="flex">
+          <Button type="link">新增</Button>
+        </div>
+      ),
+    },
   ];
 
   const expandedRowRender = (record: Role) => {
@@ -52,10 +62,24 @@ function ExpandedTable({ roleId }: { roleId: number }) {
   const [expandeTableData, setExpandeTableData] =
     useState<PageEntity<Account>>();
   const tableExpandColumns = [
+    { title: "ID", dataIndex: "accountId", key: "accountId" },
     { title: "用户名", dataIndex: "username", key: "username" },
+    { title: "昵称", dataIndex: "nickname", key: "nickname" },
+    {
+      title: "操作",
+      dataIndex: "action",
+      key: "action",
+      render: () => (
+        <div className="flex gap-3">
+          <Button type="link" danger className="text-red-500">
+            除名
+          </Button>
+        </div>
+      ),
+    },
   ];
 
-  const fetchAccountDataByRole = useCallback(async () => {
+  const fetchAccountDataByRole = async () => {
     await service
       .get("/api/account/get_account_by_role_id", {
         params: {
@@ -69,7 +93,7 @@ function ExpandedTable({ roleId }: { roleId: number }) {
           setExpandeTableData(res.data.data);
         }
       });
-  }, [roleId, pageNum, pageSize]);
+  };
 
   useEffect(() => {
     fetchAccountDataByRole();

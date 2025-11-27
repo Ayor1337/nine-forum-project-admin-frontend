@@ -3,8 +3,7 @@
 import service from "@/axios";
 import { getImageUrl } from "@/axios/ImageService";
 import { formatDate } from "@/func/DateConvert";
-import { Table, Image } from "antd";
-import { get } from "http";
+import { Table, Image, Button } from "antd";
 import { useCallback, useEffect, useState } from "react";
 
 export default function ThemeTable() {
@@ -19,13 +18,25 @@ export default function ThemeTable() {
       key: "isDeleted",
       render: (isDeleted: boolean) => <div>{isDeleted ? "是" : "否"}</div>,
     },
+    {
+      title: "操作",
+      key: "action",
+      render: (value: number, record: Theme) => (
+        <div className="flex">
+          <Button type="link">编辑</Button>
+          <Button type="link" danger>
+            删除
+          </Button>
+        </div>
+      ),
+    },
   ];
 
   const expandedRowRender = (record: Theme) => {
     return <ExpandedTable themeId={record.themeId} />;
   };
 
-  const fetchRoleData = useCallback(async () => {
+  const fetchThemeData = async () => {
     await service
       .get("/api/theme/get_themes", {
         params: {
@@ -36,14 +47,13 @@ export default function ThemeTable() {
       .then((res) => {
         if (res.data.code === 200) {
           setData(res.data.data);
-          console.log(res.data.data);
         }
       });
-  }, [pageSize, pageNum]);
+  };
 
   useEffect(() => {
-    fetchRoleData();
-  }, [fetchRoleData]);
+    fetchThemeData();
+  }, [fetchThemeData]);
 
   return (
     data && (
@@ -93,9 +103,23 @@ function ExpandedTable({ themeId }: { themeId: number }) {
     },
     {
       title: "是否隐藏",
-      dataIndex: "isDelete",
-      key: "isDelete",
+      dataIndex: "isDeleted",
+      key: "isDeleted",
       render: (isDelete: boolean) => <div>{isDelete ? "是" : "否"}</div>,
+    },
+    {
+      title: "操作",
+      key: "action",
+      render: (value: number, record: Topic) => (
+        <div className="flex">
+          <Button type="link" className="mr-2">
+            编辑
+          </Button>
+          <Button type="link" danger>
+            {record.isDeleted ? "恢复" : "删除"}
+          </Button>
+        </div>
+      ),
     },
   ];
 
@@ -111,6 +135,7 @@ function ExpandedTable({ themeId }: { themeId: number }) {
       .then((res) => {
         if (res.data.code === 200) {
           setExpandeTableData(res.data.data);
+          console.log(res.data.data);
         }
       });
   }, [themeId, pageNum, pageSize]);
