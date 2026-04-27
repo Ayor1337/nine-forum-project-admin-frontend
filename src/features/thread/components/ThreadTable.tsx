@@ -8,7 +8,7 @@ import {
   type TableColumnsType,
 } from "antd";
 import type { FilterDropdownProps } from "antd/es/table/interface";
-import { useCallback, useEffect, useState } from "react";
+import { useState } from "react";
 import {
   useLoaderData,
   useNavigation,
@@ -23,17 +23,6 @@ interface UserFilterOption {
 
 interface UserFilterDropdownProps extends FilterDropdownProps {
   userFilterOptions: UserFilterOption[];
-  query: string;
-  setQuery: (v: string) => void;
-}
-
-interface TopicFilterOption {
-  id: string | number;
-  name: string;
-}
-
-interface TopicFilterDropdownProps extends FilterDropdownProps {
-  topicFilterOptions: TopicFilterOption[];
   query: string;
   setQuery: (v: string) => void;
 }
@@ -146,76 +135,6 @@ const renderUserFilterDropdown = ({
         onClick={() => {
           clearFilters?.();
           setSelectedKeys([]);
-          confirm();
-        }}
-      >
-        重置
-      </Button>
-      <Button type="primary" onClick={() => confirm()}>
-        确定
-      </Button>
-    </div>
-  </div>
-);
-
-const renderTopicFilterDropdown = ({
-  setSelectedKeys,
-  selectedKeys,
-  confirm,
-  clearFilters,
-  topicFilterOptions,
-  query,
-  setQuery,
-}: TopicFilterDropdownProps) => (
-  <div className="flex flex-col w-60 px-2 py-3">
-    <div className="flex">
-      <Input
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        onPressEnter={() => {
-          setSelectedKeys(query ? [query] : []);
-          confirm();
-        }}
-      />
-      <Button
-        type="link"
-        onClick={() => {
-          setSelectedKeys(query ? [query] : []);
-          confirm();
-        }}
-      >
-        搜索
-      </Button>
-    </div>
-    <Divider />
-    <div className="flex flex-col px-1 gap-1">
-      {topicFilterOptions
-        .filter((item) => item.name.toLowerCase().includes(query.toLowerCase()))
-        .map((item) => (
-          <Checkbox
-            key={item.id}
-            checked={selectedKeys.includes(String(item.id))}
-            onChange={() => {
-              const id = String(item.id);
-              if (selectedKeys.includes(id)) {
-                setSelectedKeys(selectedKeys.filter((key) => key !== id));
-              } else {
-                setSelectedKeys([...selectedKeys, id]);
-              }
-            }}
-          >
-            {item.name}
-          </Checkbox>
-        ))}
-    </div>
-    <Divider />
-    <div className="flex justify-between">
-      <Button
-        type="link"
-        onClick={() => {
-          clearFilters?.();
-          setSelectedKeys([]);
-          setQuery("");
           confirm();
         }}
       >
