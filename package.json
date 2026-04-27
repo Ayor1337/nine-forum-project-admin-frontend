@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 10072",
-    "build": "next build",
-    "start": "next start -p 81",
+    "dev": "vite --port 10072",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
     "lint": "biome check",
     "format": "biome format --write"
   },
@@ -15,19 +15,20 @@
     "antd": "5.28.0",
     "axios": "1.13.2",
     "dayjs": "1.11.19",
-    "next": "16.0.1",
     "quill-delta-to-html": "^0.12.1",
     "react": "19.2.0",
-    "react-dom": "19.2.0"
+    "react-dom": "19.2.0",
+    "react-router-dom": "^7"
   },
   "devDependencies": {
     "@biomejs/biome": "2.2.0",
     "@tailwindcss/postcss": "^4",
-    "@types/node": "20",
+    "@tailwindcss/vite": "^4.2.4",
     "@types/react": "19.2.0",
     "@types/react-dom": "19.2.0",
-    "babel-plugin-react-compiler": "1.0.0",
+    "@vitejs/plugin-react": "^6.0.1",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vite": "^8"
   }
 }

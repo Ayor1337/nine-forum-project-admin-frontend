@@ -1,6 +1,0 @@
-@supports (scrollbar-width: auto) {
-  .scroller-hidden {
-    scrollbar-color: var(--scrollbar-color-thumb) var(--scrollbar-color-track);
-    scrollbar-width: none;
-  }
-}
