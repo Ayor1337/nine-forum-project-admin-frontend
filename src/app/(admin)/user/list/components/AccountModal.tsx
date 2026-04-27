@@ -39,12 +39,31 @@ export default function AccountModal({
   }, [accountId]);
 
   const handleUpload = async (data: Account) => {
-    await service.put("/api/account/update", data).then((res) => {
+    await service.post("/api/account/update", data).then((res) => {
       if (res.data.code === 200) {
         message.success("上传成功");
         handleFinish();
       }
     });
+  };
+
+  const handleSubmitVioloation = async (type: String) => {
+    await service
+      .post(
+        "/api/account/submit_violation",
+        {},
+        {
+          params: {
+            accountId: accountId,
+            type: type,
+          },
+        }
+      )
+      .then((res) => {
+        if (res.data.code === 200) {
+          message.success("提交成功");
+        }
+      });
   };
 
   const handleFinish = () => {
@@ -61,7 +80,7 @@ export default function AccountModal({
 
   return (
     data && (
-      <Modal open={isOpen} footer={null}>
+      <Modal open={isOpen} onCancel={handleCancel} footer={null}>
         <div className="px-5 py-3">
           <Divider>用户信息</Divider>
           <Form<Account> initialValues={data} onFinish={handleUpload}>
@@ -91,11 +110,26 @@ export default function AccountModal({
                 <Input />
               </Form.Item>
             )}
-            <Divider>操作</Divider>
+            <Divider>操作 - 无须提交</Divider>
             <div className="grid grid-cols-3 gap-x-2">
-              <Button type="primary">昵称违规</Button>
-              <Button type="primary">头像违规</Button>
-              <Button type="primary">背景违规</Button>
+              <Button
+                type="primary"
+                onClick={() => handleSubmitVioloation("nickname")}
+              >
+                昵称违规
+              </Button>
+              <Button
+                type="primary"
+                onClick={() => handleSubmitVioloation("avatar")}
+              >
+                头像违规
+              </Button>
+              <Button
+                type="primary"
+                onClick={() => handleSubmitVioloation("banner")}
+              >
+                背景违规
+              </Button>
             </div>
             <div className="flex justify-end gap-3 mt-5">
               <Button type="primary" htmlType="submit">

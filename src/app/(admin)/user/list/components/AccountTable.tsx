@@ -2,11 +2,13 @@
 
 import service from "@/axios";
 import { getImageUrl } from "@/axios/ImageService";
-import { Table, Image, Button } from "antd";
+import { Table, Image, Button, Input } from "antd";
 import { useCallback, useEffect, useState } from "react";
 import AccountModal from "./AccountModal";
 
 export default function AccountTable() {
+  const [searchValue, setSearchValue] = useState<string>("");
+  const [query, setQuery] = useState<string>("");
   const [data, setData] = useState<PageEntity<Account>>();
   const [pageNum, setPageNum] = useState<number>(1);
   const [pageSize, setPageSize] = useState<number>(10);
@@ -24,7 +26,7 @@ export default function AccountTable() {
       render: (value: string) => (
         <Image
           src={getImageUrl(value)}
-          className="size-15!"
+          className="size-15! shrink-0"
           alt="用户头像"
           preview={{ mask: <div className="text-xs">预览</div> }}
         />
@@ -59,14 +61,14 @@ export default function AccountTable() {
       ),
     },
   ];
-  
-  const fetchData = async () => {
+
+  const fetchUserData = async () => {
     await service
       .get("/api/account/list", {
         params: {
+          query: query,
           page_num: pageNum,
           page_size: pageSize,
-          status: status,
         },
       })
       .then((res) => {
@@ -82,7 +84,7 @@ export default function AccountTable() {
   };
 
   const handleModalFinish = () => {
-    fetchData();
+    fetchUserData();
     setIsModalOpen(false);
   };
 
@@ -91,12 +93,32 @@ export default function AccountTable() {
   };
 
   useEffect(() => {
-    fetchData();
-  }, [fetchData]);
+    fetchUserData();
+  }, []);
+
+  useEffect(() => {
+    fetchUserData();
+  }, [query, pageNum, pageSize]);
 
   return (
     data && (
       <>
+        <div className="flex w-1/3 mb-3 items-center">
+          <div className="text-nowrap">按用户名搜索：</div>
+          <Input
+            value={searchValue}
+            onChange={(e) => setSearchValue(e.target.value)}
+          />
+          <Button
+            type="primary"
+            className="ml-2"
+            onClick={() => {
+              setQuery(searchValue);
+            }}
+          >
+            搜索
+          </Button>
+        </div>
         <Table
           rowKey="accountId"
           columns={tableColumns}
