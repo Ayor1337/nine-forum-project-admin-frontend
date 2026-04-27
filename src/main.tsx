@@ -1,7 +1,38 @@
 import { DesktopOutlined, HomeOutlined, UserOutlined } from "@ant-design/icons";
-import { Breadcrumb, Layout, Menu, type MenuProps, theme } from "antd";
-import { useMemo, useState } from "react";
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import {
+  App,
+  Breadcrumb,
+  ConfigProvider,
+  Layout,
+  Menu,
+  type MenuProps,
+  theme,
+} from "antd";
+import zhCN from "antd/locale/zh_CN";
+import dayjs from "dayjs";
+import { StrictMode, useMemo, useState } from "react";
+import { createRoot } from "react-dom/client";
+import {
+  createBrowserRouter,
+  Outlet,
+  RouterProvider,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
+import CheckPage from "@/routes/check/route";
+import DashboardPage from "@/routes/dashboard/route";
+import HomePage from "@/routes/home/route";
+import LoginPage, { action as loginAction } from "@/routes/login/route";
+import BroadcastPage, {
+  loader as broadcastLoader,
+} from "@/routes/system_broadcast/route";
+import ThemePage, { loader as themeLoader } from "@/routes/theme/route";
+import ThreadPage, { loader as threadLoader } from "@/routes/thread/route";
+import UserListPage, {
+  loader as userListLoader,
+} from "@/routes/user_list/route";
+import UserRolePage from "@/routes/user_role/route";
+import "@/globals.css";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -77,7 +108,19 @@ function findTrail(list: NavItem[], target: string): string[] | null {
   return null;
 }
 
-export default function AdminLayout() {
+function RootLayout() {
+  dayjs.locale("zh-cn");
+
+  return (
+    <ConfigProvider locale={zhCN}>
+      <App>
+        <Outlet />
+      </App>
+    </ConfigProvider>
+  );
+}
+
+function AdminLayout() {
   const navigate = useNavigate();
   const location = useLocation();
   const pathname = location.pathname;
@@ -141,3 +184,40 @@ export default function AdminLayout() {
     </Layout>
   );
 }
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <RootLayout />,
+    children: [
+      { index: true, element: <HomePage /> },
+      { path: "login", element: <LoginPage />, action: loginAction },
+      {
+        element: <AdminLayout />,
+        children: [
+          { path: "dashboard", element: <DashboardPage /> },
+          {
+            path: "user/list",
+            element: <UserListPage />,
+            loader: userListLoader,
+          },
+          { path: "user/role", element: <UserRolePage /> },
+          { path: "theme", element: <ThemePage />, loader: themeLoader },
+          { path: "thread", element: <ThreadPage />, loader: threadLoader },
+          { path: "check", element: <CheckPage /> },
+          {
+            path: "system/broadcast",
+            element: <BroadcastPage />,
+            loader: broadcastLoader,
+          },
+        ],
+      },
+    ],
+  },
+]);
+
+createRoot(document.getElementById("root")!).render(
+  <StrictMode>
+    <RouterProvider router={router} />
+  </StrictMode>,
+);
