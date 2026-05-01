@@ -157,8 +157,18 @@ body::before {
   background: var(--color-accent-muted) !important;
 }
 
+.ant-table-expanded-row > td {
+  background: var(--color-bg-primary) !important;
+  padding: 8px 12px !important;
+}
+
 .ant-table-expanded-row .ant-table {
-  background: var(--color-bg-tertiary) !important;
+  background: transparent !important;
+}
+
+.ant-table-expanded-row .ant-table-thead > tr > th {
+  background: var(--color-bg-secondary) !important;
+  font-size: 0.7rem;
 }
 
 .ant-table-wrapper .ant-table-container {

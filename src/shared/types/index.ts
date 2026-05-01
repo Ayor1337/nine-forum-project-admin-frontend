@@ -50,6 +50,7 @@ interface Topic {
   coverUrl: string;
   description: string;
   createTime: Date;
+  themeId: number;
   isDeleted: boolean;
 }
 
