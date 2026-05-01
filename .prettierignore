@@ -1,0 +1,7 @@
+dist
+build
+node_modules
+.claude
+.serena
+pnpm-lock.yaml
+tsconfig.tsbuildinfo

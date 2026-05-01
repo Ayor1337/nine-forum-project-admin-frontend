@@ -1,0 +1,71 @@
+interface PageEntity<T> {
+  totalSize: number;
+  data: T[];
+}
+
+interface Account {
+  accountId: number;
+  username: string;
+  nickname: string;
+  avatarUrl: string;
+  status: number;
+  roleId?: number;
+  isDeleted?: boolean;
+}
+
+interface UpdateAccountPayload {
+  status?: number;
+  roleId?: number;
+  isDeleted?: boolean;
+}
+
+interface UserBroadcastPayload {
+  title: string;
+  message: string;
+  sendTo: number;
+}
+
+interface Role {
+  roleId: number;
+  roleName: string;
+  roleNick: string;
+  topicId: number;
+  topicName: string;
+  priority: number;
+}
+
+interface Thread {
+  threadId: number;
+  title: string;
+  createTime: Date;
+  accountId: number;
+  accountName: string;
+  topicId: number;
+  topicName: string;
+}
+
+interface Topic {
+  topicId: number;
+  title: string;
+  coverUrl: string;
+  description: string;
+  createTime: Date;
+  isDeleted: boolean;
+}
+
+interface Theme {
+  themeId: number;
+  title: string;
+  isDeleted: boolean;
+}
+
+export type {
+  PageEntity,
+  Account,
+  UpdateAccountPayload,
+  UserBroadcastPayload,
+  Role,
+  Thread,
+  Topic,
+  Theme,
+};
