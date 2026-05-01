@@ -31,16 +31,17 @@ export default function BroadcastWrapper() {
   return (
     <div className="grid grid-cols-3 gap-4">
       <div className="col-span-2">
-        <div className="text-2xl  mb-3">广播发布</div>
+        <div className="text-2xl mb-3" style={{ color: "var(--color-text-primary)" }}>
+          广播发布
+        </div>
         <Collapse items={collapseItem} />
       </div>
       <div className="col-span-1">
-        <div className="text-2xl  mb-3">历史广播</div>
+        <div className="text-2xl mb-3" style={{ color: "var(--color-text-primary)" }}>
+          历史广播
+        </div>
         <Collapse items={collapseItem} />
       </div>
-      <div className="bg-green-200">内容3</div>
-      <div className="bg-green-200">内容4</div>
-      <div className="bg-green-200">内容5</div>
     </div>
   );
 }

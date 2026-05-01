@@ -23,7 +23,18 @@ export async function action({ request }: ActionFunctionArgs) {
 
 export default function LoginPage() {
   return (
-    <div className="flex h-screen w-screen justify-center items-center bg-linear-to-b to-slate-200">
+    <div
+      className="flex h-screen w-screen justify-center items-center relative overflow-hidden"
+      style={{ background: "var(--color-bg-primary)" }}
+    >
+      {/* Subtle warm gradient accent */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(ellipse at 30% 40%, rgba(217,119,6,0.06) 0%, transparent 60%), radial-gradient(ellipse at 70% 60%, rgba(79,70,229,0.04) 0%, transparent 50%)",
+        }}
+      />
       <LoginForm />
     </div>
   );

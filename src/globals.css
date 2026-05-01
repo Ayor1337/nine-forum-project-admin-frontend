@@ -1,1 +1,394 @@
 @import "tailwindcss";
+
+/* ============================================
+   Design System: Warm Paper & Amber
+   ============================================ */
+
+:root {
+  /* Backgrounds */
+  --color-bg-primary: #f8f7f4;
+  --color-bg-secondary: #ffffff;
+  --color-bg-tertiary: #f3f2ef;
+  --color-bg-card: #ffffff;
+
+  /* Borders */
+  --color-border: #e8e6e1;
+  --color-border-hover: rgba(217, 119, 6, 0.4);
+
+  /* Text */
+  --color-text-primary: #1c1917;
+  --color-text-secondary: #57534e;
+  --color-text-tertiary: #a8a29e;
+
+  /* Accent */
+  --color-accent: #d97706;
+  --color-accent-hover: #f59e0b;
+  --color-accent-muted: rgba(217, 119, 6, 0.08);
+
+  /* Semantic */
+  --color-success: #059669;
+  --color-danger: #e11d48;
+  --color-info: #4f46e5;
+
+  /* Typography */
+  --font-sans: "DM Sans", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  /* Shape */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+
+  /* Shadows */
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.06), 0 0 0 1px rgba(0, 0, 0, 0.04);
+  --shadow-glow: 0 0 20px rgba(217, 119, 6, 0.06);
+}
+
+/* ---- Global Base ---- */
+
+html {
+  scrollbar-color: var(--color-border) transparent;
+  scrollbar-width: thin;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ---- Noise Texture Overlay ---- */
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.02;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+}
+
+/* ---- Custom Scrollbar (WebKit) ---- */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-tertiary);
+}
+
+/* ---- Animations ---- */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.page-enter {
+  animation: fadeInUp 0.4s ease-out both;
+}
+
+.stagger-1 { animation-delay: 0.05s; }
+.stagger-2 { animation-delay: 0.1s; }
+.stagger-3 { animation-delay: 0.15s; }
+.stagger-4 { animation-delay: 0.2s; }
+
+/* ---- Ant Design Global Overrides ---- */
+
+/* Tables */
+.ant-table-wrapper {
+  border-radius: var(--radius-lg) !important;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+}
+
+.ant-table {
+  background: var(--color-bg-secondary) !important;
+  color: var(--color-text-primary) !important;
+}
+
+.ant-table-thead > tr > th,
+.ant-table-thead > tr > td {
+  background: var(--color-bg-tertiary) !important;
+  color: var(--color-text-secondary) !important;
+  border-bottom: 1px solid var(--color-border) !important;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.ant-table-tbody > tr > td {
+  border-bottom: 1px solid var(--color-border) !important;
+  background: var(--color-bg-secondary) !important;
+}
+
+.ant-table-tbody > tr:hover > td {
+  background: var(--color-accent-muted) !important;
+}
+
+.ant-table-expanded-row .ant-table {
+  background: var(--color-bg-tertiary) !important;
+}
+
+.ant-table-wrapper .ant-table-container {
+  border-radius: var(--radius-lg) !important;
+}
+
+/* Pagination */
+.ant-pagination-item {
+  background: var(--color-bg-secondary) !important;
+  border: 1px solid var(--color-border) !important;
+}
+
+.ant-pagination-item a {
+  color: var(--color-text-secondary) !important;
+}
+
+.ant-pagination-item-active {
+  border-color: var(--color-accent) !important;
+}
+
+.ant-pagination-item-active a {
+  color: var(--color-accent) !important;
+}
+
+.ant-pagination-prev .ant-pagination-item-link,
+.ant-pagination-next .ant-pagination-item-link {
+  color: var(--color-text-secondary) !important;
+  background: var(--color-bg-secondary) !important;
+  border: 1px solid var(--color-border) !important;
+}
+
+/* Inputs */
+.ant-input,
+.ant-select-selector,
+.ant-picker {
+  background: var(--color-bg-secondary) !important;
+  border: 1px solid var(--color-border) !important;
+  color: var(--color-text-primary) !important;
+}
+
+.ant-input:focus,
+.ant-input-focused,
+.ant-select-focused .ant-select-selector {
+  border-color: var(--color-accent) !important;
+  box-shadow: 0 0 0 2px var(--color-accent-muted) !important;
+}
+
+.ant-input::placeholder {
+  color: var(--color-text-tertiary) !important;
+}
+
+.ant-form-item-label > label {
+  color: var(--color-text-secondary) !important;
+}
+
+/* Buttons */
+.ant-btn-default {
+  background: var(--color-bg-secondary) !important;
+  border: 1px solid var(--color-border) !important;
+  color: var(--color-text-primary) !important;
+}
+
+.ant-btn-default:hover {
+  border-color: var(--color-accent) !important;
+  color: var(--color-accent) !important;
+}
+
+.ant-btn-primary {
+  background: var(--color-accent) !important;
+  border-color: var(--color-accent) !important;
+  color: #ffffff !important;
+  font-weight: 600;
+}
+
+.ant-btn-primary:hover {
+  background: var(--color-accent-hover) !important;
+  border-color: var(--color-accent-hover) !important;
+}
+
+.ant-btn-link {
+  color: var(--color-accent) !important;
+}
+
+.ant-btn-dangerous.ant-btn-link {
+  color: var(--color-danger) !important;
+}
+
+/* Modals */
+.ant-modal-content {
+  background: var(--color-bg-secondary) !important;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg) !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12) !important;
+}
+
+.ant-modal-header {
+  background: transparent !important;
+  border-bottom: 1px solid var(--color-border) !important;
+}
+
+.ant-modal-title {
+  color: var(--color-text-primary) !important;
+}
+
+.ant-modal-close {
+  color: var(--color-text-tertiary) !important;
+}
+
+/* Collapse */
+.ant-collapse {
+  background: var(--color-bg-secondary) !important;
+  border: 1px solid var(--color-border) !important;
+}
+
+.ant-collapse-item {
+  border-bottom: 1px solid var(--color-border) !important;
+}
+
+.ant-collapse-header {
+  color: var(--color-text-primary) !important;
+}
+
+.ant-collapse-content {
+  background: var(--color-bg-tertiary) !important;
+  color: var(--color-text-primary) !important;
+}
+
+/* Select Dropdowns */
+.ant-select-dropdown {
+  background: var(--color-bg-secondary) !important;
+  border: 1px solid var(--color-border) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
+}
+
+.ant-select-item-option-active {
+  background: var(--color-accent-muted) !important;
+}
+
+.ant-select-item-option-selected {
+  background: rgba(217, 119, 6, 0.12) !important;
+}
+
+.ant-select-item {
+  color: var(--color-text-primary) !important;
+}
+
+/* DatePicker */
+.ant-picker-dropdown .ant-picker-panel-container {
+  background: var(--color-bg-secondary) !important;
+  border: 1px solid var(--color-border) !important;
+}
+
+/* Divider */
+.ant-divider {
+  border-color: var(--color-border) !important;
+}
+
+.ant-divider-inner-text {
+  color: var(--color-text-tertiary) !important;
+  font-size: 0.8rem;
+}
+
+/* Breadcrumb */
+.ant-breadcrumb {
+  color: var(--color-text-tertiary) !important;
+}
+
+.ant-breadcrumb a {
+  color: var(--color-text-secondary) !important;
+}
+
+.ant-breadcrumb a:hover {
+  color: var(--color-accent) !important;
+}
+
+.ant-breadcrumb-separator {
+  color: var(--color-text-tertiary) !important;
+}
+
+/* Checkbox */
+.ant-checkbox-wrapper {
+  color: var(--color-text-primary) !important;
+}
+
+.ant-checkbox-inner {
+  background: var(--color-bg-secondary) !important;
+  border-color: var(--color-border) !important;
+}
+
+/* Image preview */
+.ant-image-preview-operations {
+  background: rgba(0, 0, 0, 0.75) !important;
+}
+
+/* Empty state */
+.ant-empty-description {
+  color: var(--color-text-tertiary) !important;
+}
+
+/* Tooltip */
+.ant-tooltip-inner {
+  background: var(--color-text-primary) !important;
+  color: var(--color-bg-secondary) !important;
+}
+
+/* Tag */
+.ant-tag {
+  border-color: var(--color-border) !important;
+}
+
+/* ---- Utility Classes ---- */
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+.text-accent {
+  color: var(--color-accent);
+}
+
+.bg-card {
+  background: var(--color-bg-card);
+}
+
+/* ---- Scroller hidden (used in main layout) ---- */
+
+.scroller-hidden {
+  scrollbar-width: none;
+}
+
+.scroller-hidden::-webkit-scrollbar {
+  display: none;
+}

@@ -44,7 +44,7 @@ export default function AccountTable() {
       dataIndex: "status",
       key: "status",
       render: (value: number) => (
-        <div className={value === 1 ? "text-green-500" : "text-red-500"}>
+        <div style={{ color: value === 1 ? "var(--color-success)" : "var(--color-danger)" }}>
           {value === 1 ? "正常" : "禁用"}
         </div>
       ),

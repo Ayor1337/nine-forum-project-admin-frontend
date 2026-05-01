@@ -67,7 +67,7 @@ function ExpandedTable({ roleId }: { roleId: number }) {
       key: "action",
       render: () => (
         <div className="flex gap-3">
-          <Button type="link" danger className="text-red-500">
+          <Button type="link" danger>
             除名
           </Button>
         </div>
