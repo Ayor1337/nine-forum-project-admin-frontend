@@ -1,6 +1,6 @@
 import { Divider, Form, Input, Modal } from "antd";
 import useApp from "antd/es/app/useApp";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { createTopic, updateTopic } from "@/features/theme/api";
 
 interface TopicModalProps {

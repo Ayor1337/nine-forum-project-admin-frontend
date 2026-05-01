@@ -94,9 +94,9 @@ export default function ThemeTable() {
   return (
     <div className="flex gap-4 h-[calc(100vh-220px)]">
       {/* 左侧：主题列表 */}
-      <div className="w-64 shrink-0 flex flex-col border border-[var(--color-border)] rounded-lg bg-[var(--color-bg-secondary)]">
-        <div className="flex items-center justify-between p-3 border-b border-[var(--color-border)]">
-          <span className="font-medium text-[var(--color-text-primary)]">
+      <div className="w-64 shrink-0 flex flex-col border border-(--color-border) rounded-lg bg-(--color-bg-secondary)">
+        <div className="flex items-center justify-between p-3 border-b border-(--color-border)">
+          <span className="font-medium text-(--color-text-primary)">
             主题
           </span>
           <Button
@@ -114,8 +114,8 @@ export default function ThemeTable() {
               <div
                 className={`flex items-center justify-between px-3 py-2 cursor-pointer transition-colors ${
                   selectedThemeId === theme.themeId
-                    ? "bg-[var(--color-accent-muted)]"
-                    : "hover:bg-[var(--color-bg-tertiary)]"
+                    ? "bg-(--color-accent-muted)"
+                    : "hover:bg-(--color-bg-tertiary)"
                 }`}
                 onClick={() => setSelectedThemeId(theme.themeId)}
               >
@@ -154,13 +154,13 @@ export default function ThemeTable() {
             )}
           />
         </div>
-        <div className="p-2 border-t border-[var(--color-border)] text-center text-xs text-[var(--color-text-tertiary)]">
+        <div className="p-2 border-t border-(--color-border) text-center text-xs text-(--color-text-tertiary)">
           共 {initialData.totalSize} 个主题
         </div>
       </div>
 
       {/* 右侧：话题列表 */}
-      <div className="flex-1 border border-[var(--color-border)] rounded-lg bg-[var(--color-bg-secondary)] overflow-hidden">
+      <div className="flex-1 border border-(--color-border) rounded-lg bg-(--color-bg-secondary) overflow-hidden">
         {selectedThemeId ? (
           <TopicPanel themeId={selectedThemeId} themeTitle={selectedTheme?.title ?? ""} />
         ) : (
@@ -188,7 +188,7 @@ function TopicPanel({
   themeTitle: string;
 }) {
   const [pageNum, setPageNum] = useState(1);
-  const [pageSize, setPageSize] = useState(10);
+  const [pageSize] = useState(10);
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState<PageEntity<Topic>>();
 
@@ -253,12 +253,12 @@ function TopicPanel({
 
   return (
     <div className="flex flex-col h-full">
-      <div className="flex items-center justify-between p-3 border-b border-[var(--color-border)]">
+      <div className="flex items-center justify-between p-3 border-b border-(--color-border)">
         <div className="flex items-center gap-2">
-          <span className="font-medium text-[var(--color-text-primary)]">
+          <span className="font-medium text-(--color-text-primary)">
             {themeTitle}
           </span>
-          <span className="text-xs text-[var(--color-text-tertiary)]">
+          <span className="text-xs text-(--color-text-tertiary)">
             · {data?.totalSize ?? 0} 个话题
           </span>
         </div>
@@ -277,7 +277,7 @@ function TopicPanel({
           loading={loading}
           dataSource={data?.data ?? []}
           renderItem={(topic) => (
-            <div className="flex items-start gap-3 p-3 rounded-lg hover:bg-[var(--color-bg-tertiary)] transition-colors">
+            <div className="flex items-start gap-3 p-3 rounded-lg hover:bg-(--color-bg-tertiary) transition-colors">
               <Image
                 src={getImageUrl(topic.coverUrl)}
                 width={80}
@@ -302,7 +302,7 @@ function TopicPanel({
                 >
                   {topic.description || "暂无描述"}
                 </Typography.Paragraph>
-                <span className="text-xs text-[var(--color-text-tertiary)]">
+                <span className="text-xs text-(--color-text-tertiary)">
                   {formatDate(topic.createTime)}
                 </span>
               </div>
@@ -339,7 +339,7 @@ function TopicPanel({
       </div>
 
       {data && data.totalSize > pageSize && (
-        <div className="flex justify-center p-3 border-t border-[var(--color-border)]">
+        <div className="flex justify-center p-3 border-t border-(--color-border)">
           <Space>
             <Button
               size="small"
@@ -348,7 +348,7 @@ function TopicPanel({
             >
               上一页
             </Button>
-            <span className="text-sm text-[var(--color-text-tertiary)]">
+            <span className="text-sm text-(--color-text-tertiary)">
               {pageNum} / {Math.ceil(data.totalSize / pageSize)}
             </span>
             <Button
