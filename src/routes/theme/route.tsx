@@ -1,6 +1,6 @@
 import type { LoaderFunctionArgs } from "react-router-dom";
 import { getThemeList } from "@/features/theme/api";
-import ThemeTable from "@/features/theme/components/ThemeTable";
+import ContentPage from "@/features/content/components/ContentPage";
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const url = new URL(request.url);
@@ -11,6 +11,6 @@ export async function loader({ request }: LoaderFunctionArgs) {
   return { data };
 }
 
-export default function ThemePage() {
-  return <ThemeTable />;
+export default function ContentRoute() {
+  return <ContentPage />;
 }

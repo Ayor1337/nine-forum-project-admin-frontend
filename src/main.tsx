@@ -33,7 +33,6 @@ import BroadcastPage, {
   loader as broadcastLoader,
 } from "@/routes/system_broadcast/route";
 import ThemePage, { loader as themeLoader } from "@/routes/theme/route";
-import ThreadPage, { loader as threadLoader } from "@/routes/thread/route";
 import UserListPage, {
   loader as userListLoader,
 } from "@/routes/user_list/route";
@@ -41,9 +40,6 @@ import UserRolePage from "@/routes/user_role/route";
 import PermissionListPage, {
   loader as permissionListLoader,
 } from "@/routes/permission_list/route";
-import TagListPage, {
-  loader as tagListLoader,
-} from "@/routes/tag_list/route";
 import PostListPage, {
   loader as postListLoader,
 } from "@/routes/post_list/route";
@@ -74,6 +70,7 @@ import AccountStatListPage, {
 import TopicStatListPage, {
   loader as topicStatListLoader,
 } from "@/routes/topic_stat_list/route";
+import SystemSettingPage from "@/routes/system_setting/route";
 import "@/globals.css";
 import { antTheme } from "./antd.theme";
 
@@ -114,9 +111,7 @@ const menuConfig: NavItem[] = [
       { label: "用户统计", key: "/account-stat/list" },
     ],
   },
-  { label: "主题", key: "/theme" },
-  { label: "标签", key: "/tag/list" },
-  { label: "帖子", key: "/thread" },
+  { label: "帖子管理", key: "/content" },
   { label: "回复", key: "/post/list" },
   { label: "点赞", key: "/like/list" },
   { label: "收藏", key: "/collect/list" },
@@ -313,8 +308,7 @@ const router = createBrowserRouter([
             loader: userListLoader,
           },
           { path: "user/role", element: <UserRolePage /> },
-          { path: "theme", element: <ThemePage />, loader: themeLoader },
-          { path: "thread", element: <ThreadPage />, loader: threadLoader },
+          { path: "content", element: <ThemePage />, loader: themeLoader },
           { path: "check", element: <CheckPage /> },
           {
             path: "system/broadcast",
@@ -325,11 +319,6 @@ const router = createBrowserRouter([
             path: "permission/list",
             element: <PermissionListPage />,
             loader: permissionListLoader,
-          },
-          {
-            path: "tag/list",
-            element: <TagListPage />,
-            loader: tagListLoader,
           },
           {
             path: "post/list",
@@ -380,6 +369,10 @@ const router = createBrowserRouter([
             path: "topic-stat/list",
             element: <TopicStatListPage />,
             loader: topicStatListLoader,
+          },
+          {
+            path: "system/systemSetting",
+            element: <SystemSettingPage />,
           },
         ],
       },
