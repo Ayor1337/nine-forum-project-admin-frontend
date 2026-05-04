@@ -43,11 +43,15 @@ export default function AccountTable() {
       title: "状态",
       dataIndex: "status",
       key: "status",
-      render: (value: number) => (
-        <div style={{ color: value === 1 ? "var(--color-success)" : "var(--color-danger)" }}>
-          {value === 1 ? "正常" : "禁用"}
-        </div>
-      ),
+      render: (value: number) => {
+        const map: Record<number, { label: string; color: string }> = {
+          1: { label: "正常", color: "var(--color-success)" },
+          2: { label: "禁言", color: "var(--color-warning)" },
+          3: { label: "封禁", color: "var(--color-danger)" },
+        };
+        const cfg = map[value] ?? { label: "未知", color: "var(--color-text-tertiary)" };
+        return <div style={{ color: cfg.color }}>{cfg.label}</div>;
+      },
     },
     {
       title: "操作",

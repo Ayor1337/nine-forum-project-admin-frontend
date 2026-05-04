@@ -3,6 +3,7 @@ import useApp from "antd/es/app/useApp";
 import { useCallback, useEffect, useState } from "react";
 import {
   getAccountById,
+  restoreAccount,
   submitAccountViolation,
   updateAccount,
 } from "@/features/user/api";
@@ -80,13 +81,24 @@ export default function AccountModal({
                 }}
               >
                 <Select.Option value={1}>正常</Select.Option>
-                <Select.Option value={2}>禁用</Select.Option>
+                <Select.Option value={2}>禁言</Select.Option>
+                <Select.Option value={3}>封禁</Select.Option>
               </Select>
             </Form.Item>
-            {status === 2 && isOnce && (
-              <Form.Item label="封禁理由">
-                <Input />
-              </Form.Item>
+            {data.status !== 1 && (
+              <div className="mb-4">
+                <Button
+                  type="primary"
+                  danger
+                  onClick={async () => {
+                    await restoreAccount(accountId);
+                    message.success("已恢复为正常");
+                    fetchAccountData();
+                  }}
+                >
+                  恢复为正常
+                </Button>
+              </div>
             )}
             <Divider>操作 - 无须提交</Divider>
             <div className="grid grid-cols-3 gap-x-2">

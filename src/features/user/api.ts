@@ -72,6 +72,12 @@ export async function getRoleList() {
   throw new Error(res.data.message);
 }
 
+export async function restoreAccount(accountId: number) {
+  const res = await client.put(`/api/accounts/${accountId}/restore`);
+  if (res.data.code === 200) return res.data.data;
+  throw new Error(res.data.message);
+}
+
 export async function getAccountByRoleId(params: {
   page_num: number;
   page_size: number;

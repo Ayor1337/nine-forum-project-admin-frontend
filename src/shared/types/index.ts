@@ -191,6 +191,32 @@ interface History {
   createTime: Date;
 }
 
+// ReportVO - 举报详情
+interface ReportVO {
+  reportId: number;
+  reporterAccountId: number;
+  reportedAccountId: number;
+  targetType: string;
+  targetId: number;
+  reportType: string;
+  description: string;
+  status: string;
+  handlerAccountId: number | null;
+  handleNote: string | null;
+  handledAt: string | null;
+  reportedUsernameSnapshot: string | null;
+  targetSummarySnapshot: string | null;
+  createTime: string;
+  updateTime: string;
+}
+
+// ReportHandleDTO - 举报处理请求体
+interface ReportHandleDTO {
+  status: string;
+  handleNote?: string;
+  accountAction?: string;
+}
+
 // AccountStatVO
 interface AccountStat {
   userStatId: number;
@@ -235,4 +261,6 @@ export type {
   History,
   AccountStat,
   TopicStat,
+  ReportVO,
+  ReportHandleDTO,
 };

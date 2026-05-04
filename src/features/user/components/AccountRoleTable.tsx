@@ -187,10 +187,10 @@ function UserPanel({
                 </div>
               </div>
               <Tag
-                color={account.status === 1 ? "success" : "error"}
+                color={account.status === 1 ? "success" : account.status === 2 ? "warning" : "error"}
                 className="shrink-0"
               >
-                {account.status === 1 ? "正常" : "禁用"}
+                {account.status === 1 ? "正常" : account.status === 2 ? "禁言" : "封禁"}
               </Tag>
               <Popconfirm
                 title="确定将该用户除名？"
