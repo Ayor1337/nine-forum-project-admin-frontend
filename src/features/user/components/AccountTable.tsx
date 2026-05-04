@@ -6,11 +6,11 @@ import {
   useSearchParams,
 } from "react-router-dom";
 import { getImageUrl } from "@/shared/api/image";
-import type { Account, PageEntity } from "@/shared/types";
+import type { AccountVO, PageEntity } from "@/shared/types";
 import AccountModal from "./AccountModal";
 
 export default function AccountTable() {
-  const { data } = useLoaderData() as { data: PageEntity<Account> };
+  const { data } = useLoaderData() as { data: PageEntity<AccountVO> };
   const [searchParams, setSearchParams] = useSearchParams();
   const navigation = useNavigation();
 
@@ -52,7 +52,7 @@ export default function AccountTable() {
     {
       title: "操作",
       key: "action",
-      render: (_value: number, record: Account) => (
+      render: (_value: number, record: AccountVO) => (
         <div className="flex">
           <Button
             type="link"

@@ -6,7 +6,7 @@ import {
   submitAccountViolation,
   updateAccount,
 } from "@/features/user/api";
-import type { Account, UpdateAccountPayload } from "@/shared/types";
+import type { AccountVO, AccountDTO } from "@/shared/types";
 
 interface AccountModalProps {
   accountId: number;
@@ -21,7 +21,7 @@ export default function AccountModal({
   onOk,
   onCancel,
 }: AccountModalProps) {
-  const [data, setData] = useState<Account>();
+  const [data, setData] = useState<AccountVO>();
   const [status, setStatus] = useState<number>();
   const [isOnce, setIsOnce] = useState<boolean>(false);
 
@@ -33,8 +33,8 @@ export default function AccountModal({
     setStatus(account.status);
   }, [accountId]);
 
-  const handleUpload = async (data: UpdateAccountPayload) => {
-    await updateAccount(accountId, { status: data.status });
+  const handleUpload = async (data: AccountDTO) => {
+    await updateAccount(accountId, { accountId, status: data.status });
     message.success("上传成功");
     handleFinish();
   };
@@ -61,7 +61,7 @@ export default function AccountModal({
       <Modal open={isOpen} onCancel={handleCancel} footer={null}>
         <div className="px-5 py-3">
           <Divider>用户信息</Divider>
-          <Form<Account> initialValues={data} onFinish={handleUpload}>
+          <Form<AccountVO> initialValues={data} onFinish={handleUpload}>
             <Form.Item name="accountId" label="用户ID">
               <Input disabled />
             </Form.Item>

@@ -75,3 +75,11 @@ export async function deleteTopic(topicId: number) {
   if (res.data.code === 200) return res.data.data;
   throw new Error(res.data.message);
 }
+
+export async function getTopicOptions(query?: string) {
+  const res = await client.get("/api/topics/options", {
+    params: { query },
+  });
+  if (res.data.code === 200) return res.data.data;
+  throw new Error(res.data.message);
+}

@@ -1,16 +1,20 @@
 import { client } from "@/shared/api/client";
-import type { UpdateAccountPayload } from "@/shared/types";
+import type { AccountDTO, CreateAccountPayload } from "@/shared/types";
 
 export async function getAccountList(params: {
   query: string;
   pageNum: number;
   pageSize: number;
+  status?: number;
+  role_id?: number;
 }) {
   const res = await client.get("/api/accounts", {
     params: {
       query: params.query,
       page_num: params.pageNum,
       page_size: params.pageSize,
+      status: params.status,
+      role_id: params.role_id,
     },
   });
   if (res.data.code === 200) return res.data.data;
@@ -23,11 +27,23 @@ export async function getAccountById(accountId: number) {
   throw new Error(res.data.message);
 }
 
+export async function createAccount(data: CreateAccountPayload) {
+  const res = await client.post("/api/accounts", data);
+  if (res.data.code === 200) return res.data.data;
+  throw new Error(res.data.message);
+}
+
 export async function updateAccount(
   accountId: number,
-  data: UpdateAccountPayload,
+  data: AccountDTO,
 ) {
   const res = await client.put(`/api/accounts/${accountId}`, data);
+  if (res.data.code === 200) return res.data.data;
+  throw new Error(res.data.message);
+}
+
+export async function deleteAccount(accountId: number) {
+  const res = await client.delete(`/api/accounts/${accountId}`);
   if (res.data.code === 200) return res.data.data;
   throw new Error(res.data.message);
 }

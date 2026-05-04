@@ -14,7 +14,7 @@ import {
   useNavigation,
   useSearchParams,
 } from "react-router-dom";
-import type { Account, PageEntity, Thread } from "@/shared/types";
+import type { AccountVO, PageEntity, ThreadTableVO } from "@/shared/types";
 import { formatDate } from "@/shared/utils/DateConvert";
 
 interface UserFilterOption {
@@ -29,8 +29,8 @@ interface UserFilterDropdownProps extends FilterDropdownProps {
 
 export default function ThreadTable() {
   const { data: initialData, userOptions } = useLoaderData() as {
-    data: PageEntity<Thread>;
-    userOptions: Account[];
+    data: PageEntity<ThreadTableVO>;
+    userOptions: AccountVO[];
   };
   const [searchParams, setSearchParams] = useSearchParams();
   const navigation = useNavigation();
@@ -48,7 +48,7 @@ export default function ThreadTable() {
     });
   };
 
-  const tableColumns: TableColumnsType<Thread> = [
+  const tableColumns: TableColumnsType<ThreadTableVO> = [
     { title: "标题", dataIndex: "title", key: "title" },
     {
       title: "作者",

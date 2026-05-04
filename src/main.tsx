@@ -38,6 +38,42 @@ import UserListPage, {
   loader as userListLoader,
 } from "@/routes/user_list/route";
 import UserRolePage from "@/routes/user_role/route";
+import PermissionListPage, {
+  loader as permissionListLoader,
+} from "@/routes/permission_list/route";
+import TagListPage, {
+  loader as tagListLoader,
+} from "@/routes/tag_list/route";
+import PostListPage, {
+  loader as postListLoader,
+} from "@/routes/post_list/route";
+import LikeListPage, {
+  loader as likeListLoader,
+} from "@/routes/like_list/route";
+import CollectListPage, {
+  loader as collectListLoader,
+} from "@/routes/collect_list/route";
+import ConversationListPage, {
+  loader as conversationListLoader,
+} from "@/routes/conversation_list/route";
+import ConversationMessagesPage, {
+  loader as conversationMessagesLoader,
+} from "@/routes/conversation_messages/route";
+import TopicChatListPage, {
+  loader as topicChatListLoader,
+} from "@/routes/topic_chat_list/route";
+import ChatboardHistoryListPage, {
+  loader as chatboardHistoryListLoader,
+} from "@/routes/chatboard_history_list/route";
+import HistoryListPage, {
+  loader as historyListLoader,
+} from "@/routes/history_list/route";
+import AccountStatListPage, {
+  loader as accountStatListLoader,
+} from "@/routes/account_stat_list/route";
+import TopicStatListPage, {
+  loader as topicStatListLoader,
+} from "@/routes/topic_stat_list/route";
 import "@/globals.css";
 import { antTheme } from "./antd.theme";
 
@@ -75,17 +111,34 @@ const menuConfig: NavItem[] = [
     children: [
       { label: "用户列表", key: "/user/list" },
       { label: "用户角色", key: "/user/role" },
+      { label: "用户统计", key: "/account-stat/list" },
     ],
   },
   { label: "主题", key: "/theme" },
+  { label: "标签", key: "/tag/list" },
   { label: "帖子", key: "/thread" },
+  { label: "回复", key: "/post/list" },
+  { label: "点赞", key: "/like/list" },
+  { label: "收藏", key: "/collect/list" },
   { label: "举报审查", key: "/check" },
+  {
+    label: "会话",
+    key: "/conversation",
+    children: [
+      { label: "会话列表", key: "/conversation/list" },
+      { label: "话题聊天", key: "/topic-chat/list" },
+      { label: "聊天板历史", key: "/chatboard-history/list" },
+    ],
+  },
+  { label: "浏览历史", key: "/history/list" },
+  { label: "话题统计", key: "/topic-stat/list" },
   {
     label: "系统",
     key: "/system",
     icon: <DesktopOutlined />,
     children: [
       { label: "通知广播", key: "/system/broadcast" },
+      { label: "权限管理", key: "/permission/list" },
       { label: "系统设置", key: "/system/systemSetting" },
     ],
   },
@@ -267,6 +320,66 @@ const router = createBrowserRouter([
             path: "system/broadcast",
             element: <BroadcastPage />,
             loader: broadcastLoader,
+          },
+          {
+            path: "permission/list",
+            element: <PermissionListPage />,
+            loader: permissionListLoader,
+          },
+          {
+            path: "tag/list",
+            element: <TagListPage />,
+            loader: tagListLoader,
+          },
+          {
+            path: "post/list",
+            element: <PostListPage />,
+            loader: postListLoader,
+          },
+          {
+            path: "like/list",
+            element: <LikeListPage />,
+            loader: likeListLoader,
+          },
+          {
+            path: "collect/list",
+            element: <CollectListPage />,
+            loader: collectListLoader,
+          },
+          {
+            path: "conversation/list",
+            element: <ConversationListPage />,
+            loader: conversationListLoader,
+          },
+          {
+            path: "conversation/:id/messages",
+            element: <ConversationMessagesPage />,
+            loader: conversationMessagesLoader,
+          },
+          {
+            path: "topic-chat/list",
+            element: <TopicChatListPage />,
+            loader: topicChatListLoader,
+          },
+          {
+            path: "chatboard-history/list",
+            element: <ChatboardHistoryListPage />,
+            loader: chatboardHistoryListLoader,
+          },
+          {
+            path: "history/list",
+            element: <HistoryListPage />,
+            loader: historyListLoader,
+          },
+          {
+            path: "account-stat/list",
+            element: <AccountStatListPage />,
+            loader: accountStatListLoader,
+          },
+          {
+            path: "topic-stat/list",
+            element: <TopicStatListPage />,
+            loader: topicStatListLoader,
           },
         ],
       },

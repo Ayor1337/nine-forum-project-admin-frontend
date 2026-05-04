@@ -6,7 +6,7 @@ import { useLoaderData } from "react-router-dom";
 import { sendUserBroadcast } from "@/features/broadcast/api";
 import { getAccountById } from "@/features/user/api";
 import { getImageUrl } from "@/shared/api/image";
-import type { Account } from "@/shared/types";
+import type { AccountVO } from "@/shared/types";
 
 interface SelectOptions {
   label: string;
@@ -21,7 +21,7 @@ interface FormDataType {
 
 export default function UserBroadcast() {
   const { options } = useLoaderData() as { options: SelectOptions[] };
-  const [account, setAccount] = useState<Account>();
+  const [account, setAccount] = useState<AccountVO>();
   const { message } = useApp();
 
   const fetchAccountById = useCallback(async (accountId: number) => {

@@ -4,7 +4,7 @@ import useApp from "antd/es/app/useApp";
 import { useCallback, useEffect, useState } from "react";
 import { getAccountByRoleId, getRoleList } from "@/features/user/api";
 import { getImageUrl } from "@/shared/api/image";
-import type { Account, PageEntity, Role } from "@/shared/types";
+import type { AccountVO, PageEntity, Role } from "@/shared/types";
 
 export default function AccountRoleTable() {
   const [roles, setRoles] = useState<Role[]>([]);
@@ -70,7 +70,7 @@ export default function AccountRoleTable() {
                       {role.roleNick}
                     </div>
                     <div className="truncate text-xs text-(--color-text-tertiary)">
-                      {role.roleName} · {role.topicName}
+                      {role.roleName}
                     </div>
                   </div>
                 </div>
@@ -90,7 +90,7 @@ export default function AccountRoleTable() {
           <UserPanel
             roleId={selectedRoleId}
             roleName={selectedRole?.roleNick ?? ""}
-            topicName={selectedRole?.topicName ?? ""}
+            topicName=""
           />
         ) : (
           <div className="flex items-center justify-center h-full">
@@ -114,7 +114,7 @@ function UserPanel({
   const [pageNum, setPageNum] = useState(1);
   const [pageSize] = useState(10);
   const [loading, setLoading] = useState(false);
-  const [data, setData] = useState<PageEntity<Account>>();
+  const [data, setData] = useState<PageEntity<AccountVO>>();
 
   const { message } = useApp();
 
