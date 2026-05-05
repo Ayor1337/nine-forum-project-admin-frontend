@@ -113,6 +113,15 @@ body::before {
   to { opacity: 1; }
 }
 
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
 .page-enter {
   animation: fadeInUp 0.4s ease-out both;
 }
@@ -121,6 +130,29 @@ body::before {
 .stagger-2 { animation-delay: 0.1s; }
 .stagger-3 { animation-delay: 0.15s; }
 .stagger-4 { animation-delay: 0.2s; }
+
+/* 登录页面输入框样式 */
+.login-input .ant-input,
+.login-input .ant-input-password {
+  border-radius: 12px !important;
+  border: 1px solid var(--color-border) !important;
+  transition: all 0.3s ease !important;
+}
+
+.login-input .ant-input:focus,
+.login-input .ant-input-password:focus-within {
+  border-color: var(--color-accent) !important;
+  box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.1) !important;
+}
+
+/* 柔和阴影样式 */
+.shadow-soft {
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.06), 0 0 0 1px rgba(0, 0, 0, 0.02);
+}
+
+.shadow-soft-hover {
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.03);
+}
 
 /* ---- Ant Design Global Overrides ---- */
 

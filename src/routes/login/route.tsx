@@ -2,22 +2,27 @@ import type { ActionFunctionArgs } from "react-router-dom";
 import { redirect } from "react-router-dom";
 import { login } from "@/features/auth/api";
 import LoginForm from "@/features/auth/components/LoginForm";
-import { storeLocalToken } from "@/shared/api/token";
+import { storeLocalToken, storeSessionToken } from "@/shared/api/token";
 
 export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.formData();
   const username = formData.get("username") as string;
   const password = formData.get("password") as string;
+  const remember = formData.get("remember") === "on";
 
   try {
     const result = await login(username, password);
     if (result?.token) {
-      storeLocalToken(result.token);
+      if (remember) {
+        storeLocalToken(result.token);
+      } else {
+        storeSessionToken(result.token);
+      }
       return redirect("/dashboard");
     }
-    return { error: "登录失败" };
+    return { error: "账号或密码错误" };
   } catch {
-    return { error: "登录失败" };
+    return { error: "账号或密码错误" };
   }
 }
 
@@ -25,16 +30,62 @@ export default function LoginPage() {
   return (
     <div
       className="flex h-screen w-screen justify-center items-center relative overflow-hidden"
-      style={{ background: "var(--color-bg-primary)" }}
+      style={{ background: "#faf8f5" }}
     >
-      {/* Subtle warm gradient accent */}
+      {/* 暖色调渐变背景 */}
       <div
         className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse at 30% 40%, rgba(217,119,6,0.06) 0%, transparent 60%), radial-gradient(ellipse at 70% 60%, rgba(79,70,229,0.04) 0%, transparent 50%)",
+            "radial-gradient(ellipse at 30% 20%, rgba(217, 119, 6, 0.06) 0%, transparent 50%), radial-gradient(ellipse at 70% 80%, rgba(245, 158, 11, 0.04) 0%, transparent 50%), radial-gradient(ellipse at 50% 50%, rgba(251, 191, 36, 0.02) 0%, transparent 60%)",
         }}
       />
+
+      {/* 装饰性圆形 - 右侧 */}
+      <div
+        className="absolute hidden lg:block"
+        style={{
+          right: "-5%",
+          top: "20%",
+          width: "400px",
+          height: "400px",
+          borderRadius: "50%",
+          background:
+            "radial-gradient(circle, rgba(217, 119, 6, 0.08) 0%, transparent 70%)",
+          animation: "float 10s ease-in-out infinite",
+        }}
+      />
+
+      {/* 装饰性圆形 - 左下 */}
+      <div
+        className="absolute hidden lg:block"
+        style={{
+          left: "-8%",
+          bottom: "15%",
+          width: "300px",
+          height: "300px",
+          borderRadius: "50%",
+          background:
+            "radial-gradient(circle, rgba(245, 158, 11, 0.06) 0%, transparent 70%)",
+          animation: "float 12s ease-in-out infinite reverse",
+        }}
+      />
+
+      {/* 装饰性圆形 - 左上 */}
+      <div
+        className="absolute hidden lg:block"
+        style={{
+          left: "10%",
+          top: "10%",
+          width: "200px",
+          height: "200px",
+          borderRadius: "50%",
+          background:
+            "radial-gradient(circle, rgba(251, 191, 36, 0.05) 0%, transparent 70%)",
+          animation: "float 8s ease-in-out infinite",
+        }}
+      />
+
       <LoginForm />
     </div>
   );
