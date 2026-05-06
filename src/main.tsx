@@ -1,6 +1,9 @@
 import {
+  AlertOutlined,
   DesktopOutlined,
+  FileTextOutlined,
   HomeOutlined,
+  LogoutOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
   UserOutlined,
@@ -33,6 +36,8 @@ import BroadcastPage, {
   loader as broadcastLoader,
 } from "@/routes/system_broadcast/route";
 import ThemePage, { loader as themeLoader } from "@/routes/theme/route";
+import ProtectedRoute from "@/shared/components/ProtectedRoute";
+import { removeToken } from "@/shared/api/token";
 import UserListPage, {
   loader as userListLoader,
 } from "@/routes/user_list/route";
@@ -40,15 +45,6 @@ import UserRolePage from "@/routes/user_role/route";
 import PermissionListPage, {
   loader as permissionListLoader,
 } from "@/routes/permission_list/route";
-import PostListPage, {
-  loader as postListLoader,
-} from "@/routes/post_list/route";
-import LikeListPage, {
-  loader as likeListLoader,
-} from "@/routes/like_list/route";
-import CollectListPage, {
-  loader as collectListLoader,
-} from "@/routes/collect_list/route";
 import ConversationListPage, {
   loader as conversationListLoader,
 } from "@/routes/conversation_list/route";
@@ -67,9 +63,6 @@ import HistoryListPage, {
 import AccountStatListPage, {
   loader as accountStatListLoader,
 } from "@/routes/account_stat_list/route";
-import TopicStatListPage, {
-  loader as topicStatListLoader,
-} from "@/routes/topic_stat_list/route";
 import SystemSettingPage from "@/routes/system_setting/route";
 import "@/globals.css";
 import { antTheme } from "./antd.theme";
@@ -111,11 +104,8 @@ const menuConfig: NavItem[] = [
       { label: "用户统计", key: "/account-stat/list" },
     ],
   },
-  { label: "帖子管理", key: "/content" },
-  { label: "回复", key: "/post/list" },
-  { label: "点赞", key: "/like/list" },
-  { label: "收藏", key: "/collect/list" },
-  { label: "举报审查", key: "/check" },
+  { label: "帖子管理", key: "/content", icon: <FileTextOutlined /> },
+  { label: "举报审查", key: "/check", icon: <AlertOutlined /> },
   {
     label: "会话",
     key: "/conversation",
@@ -126,7 +116,6 @@ const menuConfig: NavItem[] = [
     ],
   },
   { label: "浏览历史", key: "/history/list" },
-  { label: "话题统计", key: "/topic-stat/list" },
   {
     label: "系统",
     key: "/system",
@@ -247,13 +236,24 @@ function AdminLayout() {
             borderBottom: "1px solid #e8e6e1",
           }}
         >
-          <div className="flex items-center h-full px-10">
+          <div className="flex items-center justify-between h-full px-10">
             <div
               className="font-semibold text-base tracking-wide"
               style={{ color: "#1c1917" }}
             >
               Nine Forum 后台管理
             </div>
+            <Button
+              type="text"
+              icon={<LogoutOutlined />}
+              onClick={() => {
+                removeToken();
+                navigate("/");
+              }}
+              style={{ color: "#a8a29e" }}
+            >
+              退出登录
+            </Button>
           </div>
         </Header>
         <Content
@@ -299,8 +299,11 @@ const router = createBrowserRouter([
       { index: true, element: <HomePage /> },
       { path: "login", element: <LoginPage />, action: loginAction },
       {
-        element: <AdminLayout />,
+        element: <ProtectedRoute />,
         children: [
+          {
+            element: <AdminLayout />,
+            children: [
           { path: "dashboard", element: <DashboardPage /> },
           {
             path: "user/list",
@@ -319,21 +322,6 @@ const router = createBrowserRouter([
             path: "permission/list",
             element: <PermissionListPage />,
             loader: permissionListLoader,
-          },
-          {
-            path: "post/list",
-            element: <PostListPage />,
-            loader: postListLoader,
-          },
-          {
-            path: "like/list",
-            element: <LikeListPage />,
-            loader: likeListLoader,
-          },
-          {
-            path: "collect/list",
-            element: <CollectListPage />,
-            loader: collectListLoader,
           },
           {
             path: "conversation/list",
@@ -366,13 +354,10 @@ const router = createBrowserRouter([
             loader: accountStatListLoader,
           },
           {
-            path: "topic-stat/list",
-            element: <TopicStatListPage />,
-            loader: topicStatListLoader,
-          },
-          {
             path: "system/systemSetting",
             element: <SystemSettingPage />,
+          },
+            ],
           },
         ],
       },

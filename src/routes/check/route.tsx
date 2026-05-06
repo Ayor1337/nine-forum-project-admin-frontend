@@ -15,6 +15,7 @@ import useApp from "antd/es/app/useApp";
 import { useCallback, useEffect, useState } from "react";
 import { getReportList, handleReport } from "@/features/report/api";
 import type { PageEntity, ReportVO } from "@/shared/types";
+import { formatDate } from "@/shared/utils/DateConvert";
 
 const { Title } = Typography;
 const { TextArea } = Input;
@@ -198,7 +199,7 @@ export default function CheckPage() {
           className="font-mono text-xs"
           style={{ color: "var(--color-text-tertiary)" }}
         >
-          {v}
+          {formatDate(new Date(v))}
         </span>
       ),
     },
