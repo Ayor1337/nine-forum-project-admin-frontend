@@ -60,9 +60,6 @@ import ChatboardHistoryListPage, {
 import HistoryListPage, {
   loader as historyListLoader,
 } from "@/routes/history_list/route";
-import AccountStatListPage, {
-  loader as accountStatListLoader,
-} from "@/routes/account_stat_list/route";
 import SystemSettingPage from "@/routes/system_setting/route";
 import "@/globals.css";
 import { antTheme } from "./antd.theme";
@@ -101,7 +98,6 @@ const menuConfig: NavItem[] = [
     children: [
       { label: "用户列表", key: "/user/list" },
       { label: "用户角色", key: "/user/role" },
-      { label: "用户统计", key: "/account-stat/list" },
     ],
   },
   { label: "帖子管理", key: "/content", icon: <FileTextOutlined /> },
@@ -347,11 +343,6 @@ const router = createBrowserRouter([
             path: "history/list",
             element: <HistoryListPage />,
             loader: historyListLoader,
-          },
-          {
-            path: "account-stat/list",
-            element: <AccountStatListPage />,
-            loader: accountStatListLoader,
           },
           {
             path: "system/systemSetting",

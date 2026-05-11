@@ -217,19 +217,6 @@ interface ReportHandleDTO {
   accountAction?: string;
 }
 
-// AccountStatVO
-interface AccountStat {
-  userStatId: number;
-  threadCount: number;
-  postCount: number;
-  replyCount: number;
-  likedCount: number;
-  collectedCount: number;
-  followingCount: number;
-  followerCount: number;
-  accountId: number;
-}
-
 // TopicStatVO
 interface TopicStat {
   topicStatId: number;
@@ -259,7 +246,6 @@ export type {
   TopicChat,
   ChatboardHistory,
   History,
-  AccountStat,
   TopicStat,
   ReportVO,
   ReportHandleDTO,
