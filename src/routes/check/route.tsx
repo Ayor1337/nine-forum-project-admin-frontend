@@ -294,9 +294,8 @@ export default function CheckPage() {
       <Card
         variant="borderless"
         style={{
-          background: "#ffffff",
-          border: "1px solid #e8e6e1",
-          boxShadow: "0 1px 3px rgba(0,0,0,0.04)",
+          background: "#0f1011",
+          border: "1px solid #23252a",
         }}
       >
         <Table

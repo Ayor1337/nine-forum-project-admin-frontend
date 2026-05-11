@@ -156,15 +156,15 @@ function AdminLayout() {
         onCollapse={(value) => setCollapsed(value)}
         trigger={null}
         style={{
-          background: "#1c1917",
-          borderRight: "1px solid #292524",
+          background: "#0f1011",
+          borderRight: "1px solid #23252a",
         }}
       >
         <div className="flex items-center justify-center h-16 select-none">
           {collapsed ? (
             <span
               className="text-xl font-bold tracking-tight"
-              style={{ color: "#f59e0b" }}
+              style={{ color: "#5e6ad2" }}
             >
               NF
             </span>
@@ -173,7 +173,7 @@ function AdminLayout() {
               className="text-base font-bold tracking-wider"
               style={{
                 color: "#f59e0b",
-                fontFamily: "'DM Sans', sans-serif",
+                fontFamily: "'Inter', sans-serif",
               }}
             >
               Nine Forum
@@ -195,7 +195,7 @@ function AdminLayout() {
             type="text"
             icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
             onClick={() => setCollapsed(!collapsed)}
-            style={{ color: "#a8a29e" }}
+            style={{ color: "#8a8f98" }}
           />
         </div>
       </Sider>
@@ -203,14 +203,14 @@ function AdminLayout() {
         <Header
           style={{
             padding: 0,
-            background: "#ffffff",
-            borderBottom: "1px solid #e8e6e1",
+            background: "#010102",
+            borderBottom: "1px solid #23252a",
           }}
         >
           <div className="flex items-center justify-between h-full px-10">
             <div
               className="font-semibold text-base tracking-wide"
-              style={{ color: "#1c1917" }}
+              style={{ color: "#f7f8f8" }}
             >
               Nine Forum 后台管理
             </div>
@@ -221,7 +221,7 @@ function AdminLayout() {
                 removeToken();
                 navigate("/");
               }}
-              style={{ color: "#a8a29e" }}
+              style={{ color: "#8a8f98" }}
             >
               退出登录
             </Button>
@@ -236,10 +236,9 @@ function AdminLayout() {
             style={{
               padding: 24,
               minHeight: 360,
-              background: "#ffffff",
+              background: "#0f1011",
               borderRadius: "var(--radius-lg)",
-              border: "1px solid #e8e6e1",
-              boxShadow: "0 1px 3px rgba(0,0,0,0.04)",
+              border: "1px solid #23252a",
             }}
           >
             <Outlet />
@@ -248,9 +247,9 @@ function AdminLayout() {
         <Footer
           style={{
             textAlign: "center",
-            background: "#f8f7f4",
-            color: "#a8a29e",
-            borderTop: "1px solid #e8e6e1",
+            background: "#010102",
+            color: "#8a8f98",
+            borderTop: "1px solid #23252a",
             fontSize: "0.8rem",
             padding: "12px 0",
           }}

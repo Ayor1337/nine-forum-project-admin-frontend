@@ -15,7 +15,7 @@ export default function LoginForm() {
         className="absolute -top-20 -right-20 w-40 h-40 rounded-full opacity-30"
         style={{
           background:
-            "radial-gradient(circle, rgba(217, 119, 6, 0.15) 0%, transparent 70%)",
+            "radial-gradient(circle, rgba(94, 106, 210, 0.15) 0%, transparent 70%)",
           animation: "float 6s ease-in-out infinite",
         }}
       />
@@ -25,7 +25,7 @@ export default function LoginForm() {
         className="absolute -bottom-16 -left-16 w-32 h-32 rounded-full opacity-20"
         style={{
           background:
-            "radial-gradient(circle, rgba(217, 119, 6, 0.1) 0%, transparent 70%)",
+            "radial-gradient(circle, rgba(94, 106, 210, 0.1) 0%, transparent 70%)",
           animation: "float 8s ease-in-out infinite reverse",
         }}
       />
@@ -34,10 +34,10 @@ export default function LoginForm() {
       <div
         className="rounded-3xl relative page-enter"
         style={{
-          background: "#ffffff",
-          border: "1px solid #e8e6e1",
+          background: "#0f1011",
+          border: "1px solid #23252a",
           boxShadow:
-            "0 20px 60px rgba(0, 0, 0, 0.06), 0 0 0 1px rgba(0, 0, 0, 0.02)",
+            "0 20px 60px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.04)",
         }}
       >
         <div className="flex flex-col h-full justify-center items-center px-12 py-14 relative">
@@ -63,7 +63,7 @@ export default function LoginForm() {
             <h1
               className="text-3xl font-bold mb-2"
               style={{
-                fontFamily: "'Nunito', sans-serif",
+                fontFamily: "'Inter', sans-serif",
                 color: "var(--color-text-primary)",
               }}
             >
@@ -134,9 +134,9 @@ export default function LoginForm() {
               <div
                 className="mt-4 p-3 rounded-xl text-sm"
                 style={{
-                  background: "rgba(225, 29, 72, 0.06)",
+                  background: "rgba(225, 29, 72, 0.08)",
                   color: "var(--color-danger)",
-                  border: "1px solid rgba(225, 29, 72, 0.1)",
+                  border: "1px solid rgba(225, 29, 72, 0.15)",
                 }}
               >
                 {actionData.error}
@@ -154,17 +154,17 @@ export default function LoginForm() {
                 fontSize: "15px",
                 background: "var(--color-accent)",
                 borderColor: "var(--color-accent)",
-                boxShadow: "0 4px 12px rgba(217, 119, 6, 0.2)",
+                boxShadow: "0 4px 12px rgba(94, 106, 210, 0.2)",
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.background = "var(--color-accent-hover)";
                 e.currentTarget.style.boxShadow =
-                  "0 6px 16px rgba(217, 119, 6, 0.3)";
+                  "0 6px 16px rgba(94, 106, 210, 0.3)";
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.background = "var(--color-accent)";
                 e.currentTarget.style.boxShadow =
-                  "0 4px 12px rgba(217, 119, 6, 0.2)";
+                  "0 4px 12px rgba(94, 106, 210, 0.2)";
               }}
             >
               登录

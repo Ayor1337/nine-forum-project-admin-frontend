@@ -37,9 +37,8 @@ const highlights = [
 ];
 
 const cardStyle: React.CSSProperties = {
-  background: "#ffffff",
-  border: "1px solid #e8e6e1",
-  boxShadow: "0 1px 3px rgba(0,0,0,0.04)",
+  background: "#0f1011",
+  border: "1px solid #23252a",
 };
 
 export default function HomePage() {
@@ -59,7 +58,7 @@ export default function HomePage() {
           <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
             <Space direction="vertical" size={12} className="max-w-3xl">
               <Space size="middle">
-                <Badge color="#d97706" text="后台管理系统" />
+                <Badge color="#5e6ad2" text="后台管理系统" />
               </Space>
               <Title level={1} className="mb-2!">
                 Nine Forum
@@ -247,7 +246,7 @@ export default function HomePage() {
                   className="mb-0!"
                   style={{ color: "var(--color-text-secondary)" }}
                 >
-                  · 暖纸主题，琥珀色强调
+                  · Linear 深色主题，薰衣草蓝强调
                 </Paragraph>
               </Space>
             </Col>
@@ -258,8 +257,8 @@ export default function HomePage() {
         <Card
           variant="borderless"
           style={{
-            background: "linear-gradient(135deg, rgba(217,119,6,0.08) 0%, rgba(79,70,229,0.04) 100%)",
-            border: "1px solid rgba(217,119,6,0.2)",
+            background: "linear-gradient(135deg, rgba(94,106,210,0.08) 0%, rgba(130,143,255,0.04) 100%)",
+            border: "1px solid rgba(94,106,210,0.2)",
           }}
         >
           <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
@@ -275,7 +274,7 @@ export default function HomePage() {
                 className="mb-0!"
                 style={{ color: "var(--color-text-secondary)" }}
               >
-                暖纸主题搭配琥珀色强调，打造清爽专业的管理后台体验。
+                Linear 深色画布搭配薰衣草蓝强调，打造静谧专业的管理后台体验。
               </Paragraph>
             </div>
             <Space size="middle" wrap>

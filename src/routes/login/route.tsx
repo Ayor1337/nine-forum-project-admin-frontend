@@ -30,14 +30,14 @@ export default function LoginPage() {
   return (
     <div
       className="flex h-screen w-screen justify-center items-center relative overflow-hidden"
-      style={{ background: "#faf8f5" }}
+      style={{ background: "#010102" }}
     >
-      {/* 暖色调渐变背景 */}
+      {/* 深色调渐变背景 */}
       <div
         className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse at 30% 20%, rgba(217, 119, 6, 0.06) 0%, transparent 50%), radial-gradient(ellipse at 70% 80%, rgba(245, 158, 11, 0.04) 0%, transparent 50%), radial-gradient(ellipse at 50% 50%, rgba(251, 191, 36, 0.02) 0%, transparent 60%)",
+            "radial-gradient(ellipse at 30% 20%, rgba(94, 106, 210, 0.06) 0%, transparent 50%), radial-gradient(ellipse at 70% 80%, rgba(130, 143, 255, 0.04) 0%, transparent 50%), radial-gradient(ellipse at 50% 50%, rgba(94, 106, 210, 0.02) 0%, transparent 60%)",
         }}
       />
 
@@ -51,7 +51,7 @@ export default function LoginPage() {
           height: "400px",
           borderRadius: "50%",
           background:
-            "radial-gradient(circle, rgba(217, 119, 6, 0.08) 0%, transparent 70%)",
+            "radial-gradient(circle, rgba(94, 106, 210, 0.08) 0%, transparent 70%)",
           animation: "float 10s ease-in-out infinite",
         }}
       />
@@ -66,7 +66,7 @@ export default function LoginPage() {
           height: "300px",
           borderRadius: "50%",
           background:
-            "radial-gradient(circle, rgba(245, 158, 11, 0.06) 0%, transparent 70%)",
+            "radial-gradient(circle, rgba(130, 143, 255, 0.06) 0%, transparent 70%)",
           animation: "float 12s ease-in-out infinite reverse",
         }}
       />
@@ -81,7 +81,7 @@ export default function LoginPage() {
           height: "200px",
           borderRadius: "50%",
           background:
-            "radial-gradient(circle, rgba(251, 191, 36, 0.05) 0%, transparent 70%)",
+            "radial-gradient(circle, rgba(94, 106, 210, 0.05) 0%, transparent 70%)",
           animation: "float 8s ease-in-out infinite",
         }}
       />
