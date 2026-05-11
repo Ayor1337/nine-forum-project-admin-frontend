@@ -45,21 +45,6 @@ import UserRolePage from "@/routes/user_role/route";
 import PermissionListPage, {
   loader as permissionListLoader,
 } from "@/routes/permission_list/route";
-import ConversationListPage, {
-  loader as conversationListLoader,
-} from "@/routes/conversation_list/route";
-import ConversationMessagesPage, {
-  loader as conversationMessagesLoader,
-} from "@/routes/conversation_messages/route";
-import TopicChatListPage, {
-  loader as topicChatListLoader,
-} from "@/routes/topic_chat_list/route";
-import ChatboardHistoryListPage, {
-  loader as chatboardHistoryListLoader,
-} from "@/routes/chatboard_history_list/route";
-import HistoryListPage, {
-  loader as historyListLoader,
-} from "@/routes/history_list/route";
 import SystemSettingPage from "@/routes/system_setting/route";
 import "@/globals.css";
 import { antTheme } from "./antd.theme";
@@ -102,16 +87,6 @@ const menuConfig: NavItem[] = [
   },
   { label: "帖子管理", key: "/content", icon: <FileTextOutlined /> },
   { label: "举报审查", key: "/check", icon: <AlertOutlined /> },
-  {
-    label: "会话",
-    key: "/conversation",
-    children: [
-      { label: "会话列表", key: "/conversation/list" },
-      { label: "话题聊天", key: "/topic-chat/list" },
-      { label: "聊天板历史", key: "/chatboard-history/list" },
-    ],
-  },
-  { label: "浏览历史", key: "/history/list" },
   {
     label: "系统",
     key: "/system",
@@ -318,31 +293,6 @@ const router = createBrowserRouter([
             path: "permission/list",
             element: <PermissionListPage />,
             loader: permissionListLoader,
-          },
-          {
-            path: "conversation/list",
-            element: <ConversationListPage />,
-            loader: conversationListLoader,
-          },
-          {
-            path: "conversation/:id/messages",
-            element: <ConversationMessagesPage />,
-            loader: conversationMessagesLoader,
-          },
-          {
-            path: "topic-chat/list",
-            element: <TopicChatListPage />,
-            loader: topicChatListLoader,
-          },
-          {
-            path: "chatboard-history/list",
-            element: <ChatboardHistoryListPage />,
-            loader: chatboardHistoryListLoader,
-          },
-          {
-            path: "history/list",
-            element: <HistoryListPage />,
-            loader: historyListLoader,
           },
           {
             path: "system/systemSetting",
