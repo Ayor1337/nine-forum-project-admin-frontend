@@ -1,297 +1,165 @@
 import {
+  AlertOutlined,
   ArrowRightOutlined,
-  CheckCircleOutlined,
-  CompassOutlined,
   DashboardOutlined,
+  FileTextOutlined,
+  SafetyOutlined,
+  SettingOutlined,
+  TeamOutlined,
 } from "@ant-design/icons";
-import {
-  Badge,
-  Button,
-  Card,
-  Col,
-  Divider,
-  Row,
-  Space,
-  Typography,
-} from "antd";
+import { Button } from "antd";
 import { useNavigate } from "react-router-dom";
+import HyperspaceBackground from "@/shared/components/HyperspaceBackground";
 
-const { Title, Paragraph, Text } = Typography;
-
-const highlights = [
+const quickLinks = [
   {
     icon: <DashboardOutlined />,
-    title: "即时概览",
-    desc: "一屏掌握关键数据与常用入口。",
+    label: "仪表盘",
+    path: "/dashboard",
   },
   {
-    icon: <CompassOutlined />,
-    title: "清晰导航",
-    desc: "分区式导航与分组标签，快速找到页面。",
+    icon: <TeamOutlined />,
+    label: "用户",
+    path: "/user/list",
   },
   {
-    icon: <CheckCircleOutlined />,
-    title: "开箱即用",
-    desc: "静态示例即可预览布局与交互风格。",
+    icon: <FileTextOutlined />,
+    label: "内容",
+    path: "/content",
+  },
+  {
+    icon: <AlertOutlined />,
+    label: "审查",
+    path: "/check",
+  },
+  {
+    icon: <SafetyOutlined />,
+    label: "权限",
+    path: "/permission/list",
+  },
+  {
+    icon: <SettingOutlined />,
+    label: "系统",
+    path: "/system/broadcast",
   },
 ];
-
-const cardStyle: React.CSSProperties = {
-  background: "#0f1011",
-  border: "1px solid #23252a",
-};
 
 export default function HomePage() {
   const navigate = useNavigate();
 
   return (
     <main
-      className="min-h-screen"
-      style={{
-        background: "var(--color-bg-primary)",
-        color: "var(--color-text-primary)",
-      }}
+      className="relative min-h-screen overflow-hidden"
+      style={{ background: "#010102", color: "var(--color-text-primary)" }}
     >
-      <div className="mx-auto flex max-w-6xl flex-col gap-12 px-6 py-16">
-        {/* Hero Card */}
-        <Card variant="borderless" style={cardStyle} className="page-enter">
-          <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
-            <Space direction="vertical" size={12} className="max-w-3xl">
-              <Space size="middle">
-                <Badge color="#5e6ad2" text="后台管理系统" />
-              </Space>
-              <Title level={1} className="mb-2!">
-                Nine Forum
-              </Title>
-              <Paragraph
-                className="mb-0! text-base"
-                style={{ color: "var(--color-text-secondary)" }}
-              >
-                采用暖纸配色与精致布局，开箱即可体验基础导航、亮点卡片与行动入口。
-              </Paragraph>
-              <Space size="middle" wrap>
-                <Button
-                  type="primary"
-                  size="large"
-                  icon={<ArrowRightOutlined />}
-                  onClick={() => navigate("/dashboard")}
-                >
-                  进入控制台
-                </Button>
-                <Button size="large">查看组件示例</Button>
-              </Space>
-            </Space>
-            <Card
-              variant="outlined"
-              className="w-full max-w-xs text-center"
+      <style>
+        {`
+          @keyframes homeRise {
+            from { opacity: 0; transform: translateY(18px); }
+            to { opacity: 1; transform: translateY(0); }
+          }
+
+          .home-rise {
+            animation: homeRise 720ms cubic-bezier(0.16, 1, 0.3, 1) both;
+          }
+
+          .home-link:hover .home-link-arrow {
+            transform: translateX(3px);
+            opacity: 1;
+          }
+
+          .home-link:hover {
+            color: #f7f8f8;
+            background: rgba(255, 255, 255, 0.055);
+            border-color: rgba(245, 158, 11, 0.28);
+          }
+
+          @media (prefers-reduced-motion: reduce) {
+            .home-rise {
+              animation: none;
+            }
+          }
+        `}
+      </style>
+
+      <HyperspaceBackground />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,0,0,0.42)_0_20%,transparent_42%),linear-gradient(180deg,rgba(0,0,0,0.12),rgba(0,0,0,0.68))]" />
+
+      <section className="relative flex min-h-screen flex-col items-center justify-center px-6 py-10 text-center">
+        <div className="home-rise relative z-10 mx-auto flex max-w-5xl flex-col items-center">
+          <div
+            className="mb-8 inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.035] px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.32em] backdrop-blur-xl"
+            style={{ color: "#f59e0b" }}
+          >
+            <span className="h-1.5 w-1.5 rounded-full bg-[#f59e0b] shadow-[0_0_18px_rgba(245,158,11,0.9)]" />
+            Console
+          </div>
+
+          <h1
+            className="mb-6 text-[clamp(4.5rem,13vw,10.5rem)] font-black leading-[0.78] tracking-[-0.09em]"
+            style={{ fontFamily: "var(--font-sans)" }}
+          >
+            Nine
+            <br />
+            Forum
+          </h1>
+
+          <p
+            className="mb-9 max-w-2xl text-base leading-8 md:text-xl"
+            style={{ color: "var(--color-text-secondary)" }}
+          >
+            面向社区运营团队的后台入口。聚合用户、内容、举报与权限，让管理者先看到方向，再进入操作。
+          </p>
+
+          <div className="mb-12 flex flex-col gap-3 sm:flex-row">
+            <Button
+              type="primary"
+              size="large"
+              icon={<ArrowRightOutlined />}
+              onClick={() => navigate("/dashboard")}
               style={{
-                background: "var(--color-bg-tertiary)",
-                borderColor: "var(--color-border)",
+                height: 48,
+                paddingInline: 28,
+                fontWeight: 700,
+                boxShadow: "0 18px 50px rgba(94, 106, 210, 0.32)",
               }}
             >
-              <Title level={4} className="mb-2!">
-                快速指引
-              </Title>
-              <Paragraph
-                className="mb-3!"
-                style={{ color: "var(--color-text-secondary)" }}
-              >
-                常用入口一键抵达
-              </Paragraph>
-              <Space direction="vertical" size={8} className="w-full">
-                <Button block onClick={() => navigate("/user/list")}>
-                  用户管理
-                </Button>
-                <Button block onClick={() => navigate("/dashboard")}>
-                  数据报表
-                </Button>
-                <Button block onClick={() => navigate("/system/broadcast")}>
-                  系统设置
-                </Button>
-              </Space>
-            </Card>
-          </div>
-        </Card>
-
-        {/* Highlight Cards */}
-        <section className="grid gap-6 md:grid-cols-3">
-          {highlights.map((item, i) => (
-            <Card
-              key={item.title}
-              variant="borderless"
-              style={cardStyle}
-              className={`page-enter stagger-${i + 1}`}
+              进入控制台
+            </Button>
+            <Button
+              size="large"
+              onClick={() => navigate("/check")}
+              style={{
+                height: 48,
+                paddingInline: 24,
+                fontWeight: 600,
+                background: "rgba(255,255,255,0.04)",
+                backdropFilter: "blur(16px)",
+              }}
             >
-              <Space size="middle" align="start">
-                <span className="text-xl" style={{ color: "var(--color-accent)" }}>
+              查看举报队列
+            </Button>
+          </div>
+
+          <nav className="home-rise z-10 flex max-w-3xl flex-wrap justify-center gap-2 [animation-delay:220ms]">
+            {quickLinks.map((item) => (
+              <button
+                key={item.path}
+                type="button"
+                onClick={() => navigate(item.path)}
+                className="home-link group flex cursor-pointer items-center gap-2 rounded-full border border-white/10 bg-white/[0.025] px-4 py-2 text-sm transition-all duration-300"
+                style={{ color: "var(--color-text-tertiary)" }}
+              >
+                <span className="text-sm transition-colors duration-300 group-hover:text-[#f59e0b]">
                   {item.icon}
                 </span>
-                <Space direction="vertical" size={4}>
-                  <Text strong>{item.title}</Text>
-                  <Paragraph
-                    className="mb-0!"
-                    style={{ color: "var(--color-text-secondary)" }}
-                  >
-                    {item.desc}
-                  </Paragraph>
-                </Space>
-              </Space>
-            </Card>
-          ))}
-        </section>
-
-        {/* Dashboard Preview Card */}
-        <Card variant="borderless" style={cardStyle}>
-          <Row gutter={[16, 16]} align="middle">
-            <Col xs={24} md={16}>
-              <Title level={3} className="mb-3!">
-                今日看板（示意）
-              </Title>
-              <Paragraph
-                className="mb-4!"
-                style={{ color: "var(--color-text-secondary)" }}
-              >
-                使用简洁卡片呈现核心指标，保持充足留白，便于团队快速浏览。
-              </Paragraph>
-              <Row gutter={[16, 16]}>
-                <Col xs={24} sm={12} lg={8}>
-                  <Card
-                    size="small"
-                    variant="outlined"
-                    style={{
-                      background: "var(--color-bg-tertiary)",
-                      borderColor: "var(--color-border)",
-                    }}
-                  >
-                    <Text type="secondary">活跃用户</Text>
-                    <Title
-                      level={3}
-                      className="mb-0! font-mono"
-                    >
-                      12,480
-                    </Title>
-                  </Card>
-                </Col>
-                <Col xs={24} sm={12} lg={8}>
-                  <Card
-                    size="small"
-                    variant="outlined"
-                    style={{
-                      background: "var(--color-bg-tertiary)",
-                      borderColor: "var(--color-border)",
-                    }}
-                  >
-                    <Text type="secondary">本周新增</Text>
-                    <Title
-                      level={3}
-                      className="mb-0! font-mono"
-                    >
-                      1,026
-                    </Title>
-                  </Card>
-                </Col>
-                <Col xs={24} sm={12} lg={8}>
-                  <Card
-                    size="small"
-                    variant="outlined"
-                    style={{
-                      background: "var(--color-bg-tertiary)",
-                      borderColor: "var(--color-border)",
-                    }}
-                  >
-                    <Text type="secondary">待办工单</Text>
-                    <Title
-                      level={3}
-                      className="mb-0! font-mono"
-                    >
-                      32
-                    </Title>
-                  </Card>
-                </Col>
-              </Row>
-            </Col>
-            <Col xs={24} md={8}>
-              <Divider
-                type="vertical"
-                className="hidden md:inline-block h-full!"
-                style={{ borderColor: "var(--color-border)" }}
-              />
-              <Space
-                direction="vertical"
-                size="small"
-                className="w-full md:pl-6"
-              >
-                <Title level={4} className="mb-2!">
-                  快捷信息
-                </Title>
-                <Paragraph
-                  className="mb-1!"
-                  style={{ color: "var(--color-text-secondary)" }}
-                >
-                  · 支持中英文界面切换
-                </Paragraph>
-                <Paragraph
-                  className="mb-1!"
-                  style={{ color: "var(--color-text-secondary)" }}
-                >
-                  · 采用 Ant Design v5 组件
-                </Paragraph>
-                <Paragraph
-                  className="mb-1!"
-                  style={{ color: "var(--color-text-secondary)" }}
-                >
-                  · Tailwind 辅助间距与布局
-                </Paragraph>
-                <Paragraph
-                  className="mb-0!"
-                  style={{ color: "var(--color-text-secondary)" }}
-                >
-                  · Linear 深色主题，薰衣草蓝强调
-                </Paragraph>
-              </Space>
-            </Col>
-          </Row>
-        </Card>
-
-        {/* CTA Banner */}
-        <Card
-          variant="borderless"
-          style={{
-            background: "linear-gradient(135deg, rgba(94,106,210,0.08) 0%, rgba(130,143,255,0.04) 100%)",
-            border: "1px solid rgba(94,106,210,0.2)",
-          }}
-        >
-          <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-            <div>
-              <Title
-                level={3}
-                className="mb-1!"
-                style={{ color: "var(--color-accent)" }}
-              >
-                准备好开始了吗？
-              </Title>
-              <Paragraph
-                className="mb-0!"
-                style={{ color: "var(--color-text-secondary)" }}
-              >
-                Linear 深色画布搭配薰衣草蓝强调，打造静谧专业的管理后台体验。
-              </Paragraph>
-            </div>
-            <Space size="middle" wrap>
-              <Button
-                type="primary"
-                size="large"
-                onClick={() => navigate("/dashboard")}
-              >
-                进入控制台
-              </Button>
-              <Button size="large">
-                了解设计规范
-              </Button>
-            </Space>
-          </div>
-        </Card>
-      </div>
+                <span>{item.label}</span>
+                <ArrowRightOutlined className="home-link-arrow text-[10px] opacity-30 transition-all duration-300" />
+              </button>
+            ))}
+          </nav>
+        </div>
+      </section>
     </main>
   );
 }

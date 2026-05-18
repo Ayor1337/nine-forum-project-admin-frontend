@@ -1,12 +1,10 @@
 import { LeftOutlined } from "@ant-design/icons";
 import { Button, Checkbox, Divider, Input, Space } from "antd";
-import { useState } from "react";
 import { Form, useActionData, useNavigate } from "react-router-dom";
 
 export default function LoginForm() {
   const navigate = useNavigate();
   const actionData = useActionData() as { error?: string } | undefined;
-  const [loading, setLoading] = useState(false);
 
   return (
     <div className="relative w-full max-w-[480px] mx-auto px-6">
@@ -78,7 +76,9 @@ export default function LoginForm() {
           </div>
 
           {/* 分割线 */}
-          <Divider style={{ borderColor: "var(--color-border)", margin: "0 0 24px 0" }} />
+          <Divider
+            style={{ borderColor: "var(--color-border)", margin: "0 0 24px 0" }}
+          />
 
           {/* 登录表单 */}
           <Form method="post" className="w-full">
@@ -123,7 +123,10 @@ export default function LoginForm() {
 
               {/* 记住我 */}
               <div className="flex items-center justify-between">
-                <Checkbox name="remember" style={{ color: "var(--color-text-secondary)" }}>
+                <Checkbox
+                  name="remember"
+                  style={{ color: "var(--color-text-secondary)" }}
+                >
                   <span className="text-sm">记住我</span>
                 </Checkbox>
               </div>
@@ -148,7 +151,6 @@ export default function LoginForm() {
               className="w-full mt-6 rounded-xl font-semibold"
               type="primary"
               htmlType="submit"
-              loading={loading}
               style={{
                 height: "48px",
                 fontSize: "15px",
@@ -177,7 +179,9 @@ export default function LoginForm() {
             style={{ color: "var(--color-text-tertiary)" }}
           >
             <p>Nine Forum 管理系统</p>
-            <p className="mt-1">© {new Date().getFullYear()} All rights reserved</p>
+            <p className="mt-1">
+              © {new Date().getFullYear()} All rights reserved
+            </p>
           </div>
         </div>
       </div>

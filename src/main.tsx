@@ -160,24 +160,52 @@ function AdminLayout() {
           borderRight: "1px solid #23252a",
         }}
       >
-        <div className="flex items-center justify-center h-16 select-none">
+        <div className="flex h-16 items-center justify-center select-none px-4">
           {collapsed ? (
-            <span
-              className="text-xl font-bold tracking-tight"
-              style={{ color: "#5e6ad2" }}
-            >
-              NF
-            </span>
-          ) : (
-            <span
-              className="text-base font-bold tracking-wider"
+            <div
+              className="flex h-9 w-9 items-center justify-center rounded-xl text-base font-black tracking-[-0.08em]"
               style={{
-                color: "#f59e0b",
-                fontFamily: "'Inter', sans-serif",
+                color: "#f7f8f8",
+                background:
+                  "linear-gradient(135deg, rgba(94,106,210,0.95), rgba(245,158,11,0.72))",
+                boxShadow:
+                  "0 0 0 1px rgba(255,255,255,0.08), 0 12px 32px rgba(94,106,210,0.28)",
               }}
             >
-              Nine Forum
-            </span>
+              N
+            </div>
+          ) : (
+            <div className="flex w-full items-center gap-3">
+              <div
+                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-lg font-black tracking-[-0.08em]"
+                style={{
+                  color: "#f7f8f8",
+                  background:
+                    "linear-gradient(135deg, rgba(94,106,210,0.96), rgba(245,158,11,0.7))",
+                  boxShadow:
+                    "0 0 0 1px rgba(255,255,255,0.08), 0 14px 36px rgba(94,106,210,0.26)",
+                }}
+              >
+                N
+              </div>
+              <div className="min-w-0">
+                <div
+                  className="truncate text-sm font-bold tracking-[-0.02em]"
+                  style={{
+                    color: "#f7f8f8",
+                    fontFamily: "var(--font-sans)",
+                  }}
+                >
+                  Nine Forum
+                </div>
+                <div
+                  className="mt-0.5 text-[10px] font-semibold uppercase tracking-[0.22em]"
+                  style={{ color: "#8a8f98" }}
+                >
+                  Console
+                </div>
+              </div>
+            </div>
           )}
         </div>
         <Menu
@@ -274,29 +302,29 @@ const router = createBrowserRouter([
           {
             element: <AdminLayout />,
             children: [
-          { path: "dashboard", element: <DashboardPage /> },
-          {
-            path: "user/list",
-            element: <UserListPage />,
-            loader: userListLoader,
-          },
-          { path: "user/role", element: <UserRolePage /> },
-          { path: "content", element: <ThemePage />, loader: themeLoader },
-          { path: "check", element: <CheckPage /> },
-          {
-            path: "system/broadcast",
-            element: <BroadcastPage />,
-            loader: broadcastLoader,
-          },
-          {
-            path: "permission/list",
-            element: <PermissionListPage />,
-            loader: permissionListLoader,
-          },
-          {
-            path: "system/systemSetting",
-            element: <SystemSettingPage />,
-          },
+              { path: "dashboard", element: <DashboardPage /> },
+              {
+                path: "user/list",
+                element: <UserListPage />,
+                loader: userListLoader,
+              },
+              { path: "user/role", element: <UserRolePage /> },
+              { path: "content", element: <ThemePage />, loader: themeLoader },
+              { path: "check", element: <CheckPage /> },
+              {
+                path: "system/broadcast",
+                element: <BroadcastPage />,
+                loader: broadcastLoader,
+              },
+              {
+                path: "permission/list",
+                element: <PermissionListPage />,
+                loader: permissionListLoader,
+              },
+              {
+                path: "system/systemSetting",
+                element: <SystemSettingPage />,
+              },
             ],
           },
         ],
